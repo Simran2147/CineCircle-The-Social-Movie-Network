@@ -1,0 +1,1 @@
+https://cinecircle.auth.us-east-1.amazoncognito.com/oauth2/authorize?response_type=code&client_id=471rcdoo8up20b24vnn4hlms61&redirect_uri=https://localhost
