@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 import requests
 
+
 movies = pickle.load(open("movies_list.pkl", 'rb'))
 cosine_sim = pickle.load(open("cosine_sim2.pkl", 'rb'))
 movies_list=movies['title'].values
@@ -10,7 +11,7 @@ selectvalue=st.selectbox("Select movie from dropdown", movies_list)
 
 
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=c7ec19ffdd3279641fb606d19ceb9bb1&language=en-US".format(movie_id)
+    url = "https://api.themoviedb.org/3/movie/{}?api_key=a5024058dd6379b74e7cb0fd67ac962c".format(movie_id)
     data=requests.get(url)
     data=data.json()
     poster_path = data['poster_path']
@@ -36,15 +37,23 @@ def get_recommendations(movie, cosine_sim=cosine_sim):
     recommend_movies = []
     recommend_poster = []
     # Get the scores of the 10 most similar movies
+
+    for i in sim_scores[1:6]:
+        movies_id=movies.iloc[i[0]].id
+        # movie_indices=movies.iloc[i[0]].title
+        # recommend_movies.append(movies['title'].iloc[movie_indices])
+        recommend_movies.append(movies.iloc[i[0]].title)
+        recommend_poster.append(fetch_poster(movies_id))
+    return recommend_movies, recommend_poster
     sim_scores = sim_scores[1:6]
 
-    # Get the movie indices
-    movie_indices = [i[0] for i in sim_scores]
-    movies_id= [i[0] for i in sim_scores]
-    recommend_movies.append(movies['title'].iloc[movie_indices])
-    recommend_poster.append(fetch_poster(movies['id'].iloc[movies_id]))
-    # Return the top 10 most similar movies
-    return recommend_movies,recommend_poster
+    # # Get the movie indices
+    # movie_indices = [i[0] for i in sim_scores]
+    # movies_id= [i[0] for i in sim_scores]
+    # recommend_movies.append(movies['title'].iloc[movie_indices])
+    # recommend_poster.append(fetch_poster(movies['id'].iloc[movies_id]))
+    # # Return the top 10 most similar movies
+    # return recommend_movies,recommend_poster
 
 
 
