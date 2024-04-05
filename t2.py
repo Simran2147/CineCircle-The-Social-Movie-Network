@@ -69,6 +69,3 @@ def recommend_movies_for_genres(genres):
 selected_genres = ['action', 'crime', 'thriller']
 recommend_movies_for_genres(selected_genres)
 
-if len(selected_genres) >= 3:
-    if st.button("Next"):
-        st.switch_page("pages/app.py")

@@ -80,5 +80,7 @@ st.text(selected_genres)
 
 # Add a button with text "Next" which is enabled when the user has more than 3 selections
 if len(selected_genres) >= 3:
-    st.button("Next")
+    if st.button("Next"):
+        st.switch_page("pages/app.py")
+
 
