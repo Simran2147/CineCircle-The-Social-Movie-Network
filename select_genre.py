@@ -42,10 +42,11 @@ user_info_data = user_info_response.json()
 # Extract the user ID
 user_id = user_info_data.get('sub')
  
-print("User ID:", user_id)
+if 'user_id' not in st.session_state:
+    st.session_state.user_id = user_id
 
 st.title("CineCircle")
-st.write("Hello", user_id)
+st.write("Hello", st.session_state.user_id)
 
 # Define genres
 genres = [
