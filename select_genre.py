@@ -45,7 +45,7 @@ user_id = user_info_data.get('sub')
 if 'user_id' not in st.session_state:
     st.session_state.user_id = user_id
 
-st.title("CineCircle")
+st.title("CineCircle: The Social Movie Network ")
 st.write("Hello", st.session_state.user_id)
 
 # Define genres

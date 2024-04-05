@@ -16,7 +16,7 @@ def fetch_poster(movie_id):
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
 
-st.header("Movie Recommender System")
+st.header("CineCircle: The Social Movie Network ")
 
 indices = pd.Series(movies.index, index=movies['title']).drop_duplicates()
 
@@ -50,17 +50,15 @@ def recommend_movies_for_genres(genres):
         count = 0
         num_columns = 10
         columns = st.columns(num_columns)
-        container_width = 420  # Adjust as needed
-        image_width = 200 
+        
+        
 
         for index, movie_genres in movies['genres'].iteritems():
             if count < num_columns and genre in movie_genres:
                 with columns[count]:
-                    with st.container():
-                        st.image(fetch_poster(movies['id'][index]), width=image_width)
-                        st.text(movies['title'][index])
-                    st.markdown("---")  # Add a horizontal line
-                    count += 1
+                    st.image(fetch_poster(movies['id'][index]))
+                    st.text(movies['title'][index])
+                count += 1
 
 # Usage
 selected_genres = ["adventure", "fantasy", "action"]
